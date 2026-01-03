@@ -1006,6 +1006,234 @@ HAVING i.subtotal_cents != COALESCE(SUM(li.amount_cents), 0);
 
 ---
 
+## Database Triggers and Functions
+
+### Philosophy: When to Use DB Triggers vs Rails
+
+**Use Database Triggers When:**
+- ✅ Enforcing immutability of financial records (legal requirement)
+- ✅ Preventing invalid state transitions that could cause billing errors
+- ✅ Validating constraints that MUST hold even if app has bugs
+- ✅ Concurrent processing safety (advisory locks)
+
+**Use Rails Application Code When:**
+- ❌ Simple timestamp updates (Rails handles this)
+- ❌ Audit logging (use gems like PaperTrail)
+- ❌ Calculations that belong in business logic
+- ❌ ID generation (model callbacks suffice)
+
+---
+
+### Critical Triggers (Keep These - Senior-Level Only)
+
+#### 1. Ledger Immutability Enforcement (CRITICAL)
+
+```sql
+-- Prevent any modifications to ledger entries
+CREATE OR REPLACE FUNCTION prevent_ledger_mutation()
+RETURNS TRIGGER AS $$
+BEGIN
+  RAISE EXCEPTION 'Ledger entries are immutable. Operation: %, Table: %', TG_OP, TG_TABLE_NAME
+    USING HINT = 'Create a new correcting entry instead of modifying existing ones',
+          ERRCODE = 'integrity_constraint_violation';
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER prevent_ledger_update
+  BEFORE UPDATE ON ledger_entries
+  FOR EACH ROW
+  EXECUTE FUNCTION prevent_ledger_mutation();
+
+CREATE TRIGGER prevent_ledger_delete
+  BEFORE DELETE ON ledger_entries
+  FOR EACH ROW
+  EXECUTE FUNCTION prevent_ledger_mutation();
+```
+
+**Why?**: Financial records MUST be immutable for audit compliance. This is non-negotiable.
+
+---
+
+#### 3. Invoice Finalization Lock
+
+```sql
+-- Prevent modifications to finalized invoices
+CREATE OR REPLACE FUNCTION prevent_finalized_invoice_mutation()
+RETURNS TRIGGER AS $$
+BEGIN
+  IF OLD.finalized_at IS NOT NULL THEN
+    RAISE EXCEPTION 'Cannot modify finalized invoice: %', OLD.invoice_id
+      USING HINT = 'Invoices are immutable once finalized',
+            ERRCODE = 'integrity_constraint_violation';
+  END IF;
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER prevent_finalized_invoice_update
+  BEFORE UPDATE ON invoices
+  FOR EACH ROW
+  EXECUTE FUNCTION prevent_finalized_invoice_mutation();
+
+CREATE TRIGGER prevent_finalized_invoice_delete
+  BEFORE DELETE ON invoices
+  FOR EACH ROW
+  EXECUTE FUNCTION prevent_finalized_invoice_mutation();
+```
+
+**Why?**: Once an invoice is finalized and sent to customer, it cannot be changed (legal requirement).
+
+---
+
+#### 4. Validate Refund Amount
+
+```sql
+-- Ensure refunds don't exceed invoice total
+CREATE OR REPLACE FUNCTION validate_refund_amount()
+RETURNS TRIGGER AS $$
+DECLARE
+  invoice_total BIGINT;
+  total_refunded BIGINT;
+BEGIN
+  -- Get invoice total
+  SELECT total_cents INTO invoice_total
+  FROM invoices
+  WHERE id = NEW.invoice_id;
+  
+  -- Get total already refunded
+  SELECT COALESCE(SUM(amount_cents), 0) INTO total_refunded
+  FROM refunds
+  WHERE invoice_id = NEW.invoice_id
+    AND id != COALESCE(NEW.id, -1);  -- Exclude current refund if update
+  
+  -- Validate
+  IF (total_refunded + NEW.amount_cents) > invoice_total THEN
+    RAISE EXCEPTION 'Refund amount (% + %) exceeds invoice total (%)',
+      total_refunded, NEW.amount_cents, invoice_total
+      USING ERRCODE = 'check_violation';
+  END IF;
+  
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER validate_refund_before_insert
+  BEFORE INSERT ON refunds
+  FOR EACH ROW
+  EXECUTE FUNCTION validate_refund_amount();
+```
+
+**Why?**: Database-level validation prevents over-refunding, even if application has bugs.
+
+---
+
+#### 5. Subscription Status Validation
+
+```sql
+-- Ensure valid subscription status transitions
+CREATE OR REPLACE FUNCTION validate_subscription_status_transition()
+RETURNS TRIGGER AS $$
+BEGIN
+  -- Define valid transitions
+  IF OLD.status IS NOT NULL AND OLD.status != NEW.status THEN
+    -- trialing -> active, canceled
+    IF OLD.status = 'trialing' AND NEW.status NOT IN ('active', 'canceled') THEN
+      RAISE EXCEPTION 'Invalid transition from trialing to %', NEW.status;
+    END IF;
+    
+    -- active -> past_due, canceled, paused
+    IF OLD.status = 'active' AND NEW.status NOT IN ('past_due', 'canceled', 'paused') THEN
+      RAISE EXCEPTION 'Invalid transition from active to %', NEW.status;
+    END IF;
+    
+    -- past_due -> active, canceled
+    IF OLD.status = 'past_due' AND NEW.status NOT IN ('active', 'canceled') THEN
+      RAISE EXCEPTION 'Invalid transition from past_due to %', NEW.status;
+    END IF;
+    
+    -- canceled is terminal (no transitions out)
+    IF OLD.status = 'canceled' THEN
+      RAISE EXCEPTION 'Cannot change status of canceled subscription';
+    END IF;
+  END IF;
+  
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER validate_subscription_status
+  BEFORE UPDATE ON subscriptions
+  FOR EACH ROW
+  EXECUTE FUNCTION validate_subscription_status_transition();
+```
+
+**Why?**: Prevents invalid subscription state transitions that could cause billing errors.
+
+---
+
+### Advisory Locks (Prevent Concurrent Billing - KEEP THIS)
+
+```sql
+-- Acquire lock for subscription billing
+CREATE OR REPLACE FUNCTION acquire_subscription_billing_lock(
+  p_subscription_id BIGINT
+)
+RETURNS BOOLEAN AS $$
+BEGIN
+  -- Try to acquire advisory lock
+  -- Returns true if lock acquired, false if already held
+  RETURN pg_try_advisory_xact_lock(
+    'subscription_billing'::regclass::integer,
+    p_subscription_id
+  );
+END;
+$$ LANGUAGE plpgsql;
+
+-- Usage in billing job:
+-- IF acquire_subscription_billing_lock(subscription_id) THEN
+--   -- Process billing
+-- ELSE
+--   -- Skip (another worker is processing)
+-- END IF;
+```
+
+**Why?**: Prevents duplicate billing if multiple workers process same subscription.
+
+---
+
+### Summary: What We Keep vs What Rails Handles
+
+#### ✅ Keep (Database Enforces)
+- Ledger immutability triggers
+- Invoice finalization lock
+- Refund validation
+- Subscription status validation
+- Advisory locks for concurrency
+
+#### ❌ Remove (Rails Handles Better)
+- Timestamp updates → Use Rails `touch: true` or callbacks
+- Invoice total calculation → Service layer logic
+- Audit logging → PaperTrail gem or service objects
+- ID generation → Model callbacks/concerns
+- Query helpers → Active Record scopes
+- Performance monitoring → DBA/ops tools
+
+**Principle**: Database enforces **invariants that must hold even if application has bugs**. Everything else belongs in well-tested application code.
+
+---
+
+### Trigger Summary Table
+
+| Trigger | Table | Purpose | Why DB Not Rails? |
+|---------|-------|---------|-------------------|
+| `prevent_ledger_mutation` | `ledger_entries` | Enforce immutability | ✅✅✅ CRITICAL - Legal requirement, can't trust app |
+| `prevent_finalized_invoice_mutation` | `invoices` | Lock finalized invoices | ✅✅ Legal compliance, absolute guarantee |
+| `validate_refund_amount` | `refunds` | Prevent over-refunding | ✅✅ Financial safety even if app has bugs |
+| `validate_subscription_status` | `subscriptions` | Valid state transitions | ✅ Complex state machine, DB enforces |
+| `acquire_subscription_billing_lock` | N/A (function) | Prevent concurrent billing | ✅ Race condition prevention |
+
+---
+
 ## Summary: Key Schema Highlights
 
 ✅ **Append-only ledger** with triggers preventing mutations  
@@ -1017,5 +1245,8 @@ HAVING i.subtotal_cents != COALESCE(SUM(li.amount_cents), 0);
 ✅ **Audit trail** with 7-year retention  
 ✅ **Immutable invoices** after finalization  
 ✅ **Multi-currency support** throughout  
+✅ **Minimal DB triggers** - only for critical invariants  
+✅ **Advisory locks** prevent concurrent processing  
+✅ **Rails handles** timestamps, audit logs, calculations  
 
-This schema demonstrates senior-level thinking: **correctness over convenience, auditability over performance shortcuts, and safety over speed**.
+This schema demonstrates senior-level thinking: **Database enforces what must be true, Rails handles what should be true. Correctness over convenience, auditability over performance shortcuts, and safety over speed**.
