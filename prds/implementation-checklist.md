@@ -68,7 +68,108 @@
 - [ ] Configure database connection pooling
 - [ ] Set up schema.rb for version control
 
-**Milestone 1**: ✅ Development environment ready, Docker running, tests passing
+### Environment Variables & Secrets Configuration
+- [ ] Create `.env` file for development (DO NOT COMMIT)
+```bash
+# .env (development)
+DATABASE_URL=postgres://postgres:postgres@localhost:5432/rails_stripelet_development
+REDIS_URL=redis://localhost:6379/0
+RAILS_ENV=development
+RAILS_MAX_THREADS=5
+
+# API Configuration
+API_BASE_URL=http://localhost:3000
+WEBHOOK_SIGNING_SECRET=whsec_dev_secret_change_in_production
+
+# Rate Limiting
+RATE_LIMIT_ENABLED=true
+RATE_LIMIT_REQUESTS_PER_MINUTE=1000
+
+# Background Jobs
+SIDEKIQ_CONCURRENCY=5
+
+# External Services (add as needed)
+# STRIPE_API_KEY=sk_test_xxx
+# AWS_ACCESS_KEY_ID=xxx
+# AWS_SECRET_ACCESS_KEY=xxx
+# S3_BUCKET_NAME=rails-stripelet-dev
+```
+
+- [ ] Create `.env.test` for test environment
+```bash
+# .env.test
+DATABASE_URL=postgres://postgres:postgres@localhost:5432/rails_stripelet_test
+REDIS_URL=redis://localhost:6379/1
+RAILS_ENV=test
+```
+
+- [ ] Create `.env.example` (COMMIT THIS - no secrets)
+```bash
+# .env.example - Copy to .env and fill in real values
+DATABASE_URL=postgres://user:password@localhost:5432/rails_stripelet_development
+REDIS_URL=redis://localhost:6379/0
+RAILS_ENV=development
+API_BASE_URL=http://localhost:3000
+WEBHOOK_SIGNING_SECRET=change_me_in_production
+RATE_LIMIT_ENABLED=true
+RATE_LIMIT_REQUESTS_PER_MINUTE=1000
+```
+
+- [ ] Add to .gitignore:
+```
+# .gitignore
+.env
+.env.local
+.env.*.local
+config/master.key
+config/credentials/*.key
+```
+
+- [ ] Install dotenv gem and configure
+  - [ ] Add `gem 'dotenv-rails'` to Gemfile (development, test groups)
+  - [ ] Run `bundle install`
+  - [ ] Verify: `rails runner "puts ENV['DATABASE_URL']"`
+
+- [ ] Configure Rails credentials for production secrets
+  - [ ] Generate master key: `EDITOR=vim rails credentials:edit`
+  - [ ] Add production secrets:
+```yaml
+# config/credentials.yml.enc (encrypted)
+production:
+  secret_key_base: <%= generated_secret %>
+  database_url: <%= ENV['DATABASE_URL'] %>
+  redis_url: <%= ENV['REDIS_URL'] %>
+  webhook_signing_secret: <%= secure_random_secret %>
+  
+# External API keys (if needed)
+stripe:
+  api_key: sk_live_xxx
+  webhook_secret: whsec_xxx
+  
+aws:
+  access_key_id: xxx
+  secret_access_key: xxx
+  s3_bucket: rails-stripelet-production
+```
+
+- [ ] Document all required environment variables in README.md
+- [ ] Create `config/initializers/environment_variables.rb` to validate required vars:
+```ruby
+# config/initializers/environment_variables.rb
+required_env_vars = %w[
+  DATABASE_URL
+  REDIS_URL
+  WEBHOOK_SIGNING_SECRET
+]
+
+if Rails.env.production?
+  required_env_vars.each do |var|
+    raise "Missing required environment variable: #{var}" unless ENV[var].present?
+  end
+end
+```
+
+**Milestone 1**: ✅ Development environment ready, Docker running, tests passing, env vars configured
 
 ---
 
@@ -181,11 +282,89 @@
 - [ ] Verify EXPLAIN ANALYZE on key queries
 
 ### Seed Data
-- [ ] Create db/seeds.rb
-  - [ ] 2-3 products (Basic, Pro, Enterprise)
-  - [ ] 6-8 prices (monthly/yearly for each product)
-  - [ ] Test data for development
+- [ ] Create db/seeds.rb with comprehensive test data:
+```ruby
+# db/seeds.rb
+puts "Seeding database..."
+
+# Products
+basic = Product.create!(
+  product_id: 'prod_basic',
+  name: 'Basic Plan',
+  description: 'For small teams getting started',
+  active: true,
+  metadata: { features: ['5 users', '10GB storage', 'Email support'] }
+)
+
+pro = Product.create!(
+  product_id: 'prod_pro',
+  name: 'Pro Plan',
+  description: 'For growing businesses',
+  active: true,
+  metadata: { features: ['25 users', '100GB storage', 'Priority support', 'API access'] }
+)
+
+enterprise = Product.create!(
+  product_id: 'prod_enterprise',
+  name: 'Enterprise Plan',
+  description: 'For large organizations',
+  active: true,
+  metadata: { features: ['Unlimited users', '1TB storage', '24/7 support', 'Custom integrations'] }
+)
+
+# Prices (USD)
+Price.create!([
+  { product: basic, price_id: 'price_basic_monthly_usd', amount_cents: 2900, currency: 'usd', interval: 'month', interval_count: 1 },
+  { product: basic, price_id: 'price_basic_yearly_usd', amount_cents: 29000, currency: 'usd', interval: 'year', interval_count: 1 },
+  { product: pro, price_id: 'price_pro_monthly_usd', amount_cents: 9900, currency: 'usd', interval: 'month', interval_count: 1 },
+  { product: pro, price_id: 'price_pro_yearly_usd', amount_cents: 99000, currency: 'usd', interval: 'year', interval_count: 1 },
+  { product: enterprise, price_id: 'price_enterprise_monthly_usd', amount_cents: 29900, currency: 'usd', interval: 'month', interval_count: 1 },
+])
+
+# Prices (EUR)
+Price.create!([
+  { product: basic, price_id: 'price_basic_monthly_eur', amount_cents: 2500, currency: 'eur', interval: 'month', interval_count: 1 },
+  { product: pro, price_id: 'price_pro_monthly_eur', amount_cents: 8900, currency: 'eur', interval: 'month', interval_count: 1 },
+])
+
+# Test Customers (for development)
+if Rails.env.development?
+  customer = Customer.create!(
+    customer_id: 'cus_test_123',
+    email: 'test@example.com',
+    name: 'Test Customer',
+    currency: 'usd',
+    metadata: { user_id: 12345, source: 'web' }
+  )
+  
+  # Test subscription with trial
+  subscription = Subscription.create!(
+    subscription_id: 'sub_test_123',
+    customer: customer,
+    price: Price.find_by(price_id: 'price_pro_monthly_usd'),
+    status: 'trialing',
+    trial_end_at: 14.days.from_now,
+    current_period_start: Date.current,
+    current_period_end: 1.month.from_now,
+    next_billing_date: 14.days.from_now.to_date
+  )
+  
+  # Test API key
+  ApiKey.create!(
+    key_digest: Digest::SHA256.hexdigest('sk_test_123'),
+    role: 'admin',
+    description: 'Test API Key'
+  )
+  
+  puts "✓ Created test customer (cus_test_123)"
+  puts "✓ Test API Key: sk_test_123"
+end
+
+puts "✓ Seeded #{Product.count} products"
+puts "✓ Seeded #{Price.count} prices"
+```
 - [ ] Run: `rails db:seed`
+- [ ] Verify seed data: `rails console` and check counts
 
 **Milestone 2**: ✅ Complete database schema with triggers, all migrations passing
 
@@ -292,6 +471,13 @@
   - [ ] Use SQL CASE for signed amounts
   - [ ] Return integer (cents)
   - [ ] Write spec with multiple entry types
+- [ ] Create `app/services/ledger/apply_credit_service.rb`
+  - [ ] Initialize with customer, amount_cents, currency, reason, actor
+  - [ ] Create credit ledger entry (negative amount = reduces balance)
+  - [ ] Audit log: who issued credit and why
+  - [ ] Invalidate balance cache
+  - [ ] Enqueue webhook
+  - [ ] Write spec
 - [ ] Create `app/services/ledger/reconciliation_service.rb` (optional)
 
 ### Billing Services
@@ -342,6 +528,24 @@
   - [ ] Enqueue webhook
   - [ ] Write spec
 
+### Invoice PDF Services
+- [ ] Add PDF generation gems to Gemfile:
+  - [ ] `gem 'wicked_pdf'` or `gem 'prawn'`
+  - [ ] `gem 'wkhtmltopdf-binary'` (for wicked_pdf)
+- [ ] Create `app/services/invoices/pdf_generator_service.rb`
+  - [ ] Initialize with invoice
+  - [ ] Generate PDF with company branding
+  - [ ] Include: invoice number, line items, totals, payment terms
+  - [ ] Return PDF binary
+  - [ ] Write spec
+- [ ] Create `app/jobs/invoices/pdf_generation_job.rb`
+  - [ ] Generate PDF when invoice finalized
+  - [ ] Store in cloud storage (S3) or local storage
+  - [ ] Cache URL for 24 hours
+  - [ ] Write spec
+- [ ] Update InvoiceFinalizerService to enqueue PDF job
+- [ ] Invoices controller pdf action returns stored PDF or 404
+
 ### Webhook Services
 - [ ] Create `app/services/webhooks/signature_verifier_service.rb`
   - [ ] HMAC-SHA256 signature generation
@@ -352,13 +556,36 @@
   - [ ] Create webhook_event record
   - [ ] Find subscribed endpoints
   - [ ] Enqueue delivery jobs
+  - [ ] Supported event types:
+    - `customer.created`, `customer.updated`, `customer.deleted`
+    - `subscription.created`, `subscription.trial_ended`, `subscription.canceled`, `subscription.updated`
+    - `invoice.created`, `invoice.finalized`, `invoice.paid`, `invoice.voided`
+    - `refund.created`, `refund.updated`
+    - `customer.credit_applied`
   - [ ] Write spec
 - [ ] Create `app/services/webhooks/delivery_service.rb`
-  - [ ] HTTP POST with signature header
+  - [ ] HTTP POST with signature header: `Stripelet-Signature: t=<timestamp>,v1=<signature>`
   - [ ] 30-second timeout
-  - [ ] Log delivery attempt
+  - [ ] Log delivery attempt with timing
   - [ ] Return success/failure
-  - [ ] Write spec (use VCR for HTTP mocking)
+  - [ ] Write spec (use VCR or WebMock for HTTP mocking)
+- [ ] Document webhook payload format:
+```json
+{
+  "id": "evt_abc123",
+  "type": "invoice.paid",
+  "created": 1641024000,
+  "data": {
+    "object": {
+      "id": "inv_xyz789",
+      "customer_id": "cus_abc123",
+      "status": "paid",
+      "amount_cents": 9900,
+      "currency": "usd"
+    }
+  }
+}
+```
 
 ### Usage Services
 - [ ] Create `app/services/usage/event_recorder_service.rb`
@@ -483,17 +710,139 @@
   - [ ] Rescue common errors (404, 422, 401, 403, 500)
   - [ ] Helper: current_api_key, current_account
   - [ ] Helper: idempotency_key from headers
+  - [ ] Pagination helper (limit, offset, default page size)
 - [ ] Create `app/controllers/application_controller.rb`
   - [ ] API-only base
 
-### API Routes
-- [ ] Configure config/routes.rb
-  - [ ] Namespace :api
-  - [ ] Namespace :v1
-  - [ ] Resources for customers, subscriptions, invoices, etc.
-  - [ ] Custom member actions (cancel, upgrade, balance)
-  - [ ] Webhook inbound route
-- [ ] Add health check route: GET /health
+### Pagination Setup
+- [ ] Install kaminari gem: `gem 'kaminari'`
+- [ ] Configure default page size:
+```ruby
+# config/initializers/kaminari_config.rb
+Kaminari.configure do |config|
+  config.default_per_page = 25
+  config.max_per_page = 100
+end
+```
+- [ ] Add pagination to list endpoints
+  - [ ] customers#index
+  - [ ] subscriptions#index
+  - [ ] invoices#index
+  - [ ] webhook_events#index
+- [ ] Include pagination metadata in responses:
+```json
+{
+  "data": [...],
+  "pagination": {
+    "current_page": 1,
+    "per_page": 25,
+    "total_pages": 4,
+    "total_count": 100
+  }
+}
+```
+
+### CORS Configuration
+- [ ] Configure CORS in config/initializers/cors.rb:
+```ruby
+# config/initializers/cors.rb
+Rails.application.config.middleware.insert_before 0, Rack::Cors do
+  allow do
+    origins ENV.fetch('ALLOWED_ORIGINS', 'http://localhost:3001').split(',')
+    
+    resource '/api/*',
+      headers: :any,
+      methods: [:get, :post, :put, :patch, :delete, :options, :head],
+      credentials: true,
+      expose: ['Authorization', 'Idempotency-Key']
+  end
+end
+```
+- [ ] Add ALLOWED_ORIGINS to .env:
+```bash
+ALLOWED_ORIGINS=http://localhost:3001,https://dashboard.stripelet.com
+```
+- [ ] Test CORS headers in request specs
+
+### API Routes Configuration
+- [ ] Configure config/routes.rb with complete routing structure:
+
+```ruby
+# config/routes.rb
+Rails.application.routes.draw do
+  # Health check
+  get '/health', to: 'health#show'
+  
+  # Sidekiq dashboard (authenticated)
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
+  
+  # API v1
+  namespace :api do
+    namespace :v1 do
+      # Customers
+      resources :customers, only: [:index, :show, :create, :update] do
+        member do
+          get :balance
+          post :credits  # Apply account credit
+        end
+      end
+      
+      # Products & Prices
+      resources :products, only: [:index, :show, :create, :update]
+      resources :prices, only: [:index, :show, :create, :update]
+      
+      # Subscriptions
+      resources :subscriptions, only: [:index, :show, :create] do
+        member do
+          post :cancel
+          post :upgrade
+        end
+      end
+      
+      # Invoices
+      resources :invoices, only: [:index, :show] do
+        member do
+          post :pay
+          get :pdf
+        end
+      end
+      
+      # Refunds
+      resources :refunds, only: [:create, :show]
+      
+      # Usage Events
+      resources :usage_events, only: [:create]
+      
+      # Webhook Endpoints
+      resources :webhook_endpoints
+      
+      # Webhook Events (read-only for customers)
+      resources :webhook_events, only: [:index, :show] do
+        member do
+          post :replay
+        end
+      end
+      
+      # Reports
+      namespace :reports do
+        get :mrr
+        get :revenue_recognition
+        get 'ledger', to: 'ledger#index'
+        get 'ledger/export', to: 'ledger#export'
+      end
+    end
+  end
+  
+  # Incoming webhooks (not versioned, external)
+  namespace :webhooks do
+    post :inbound
+  end
+end
+```
+
+- [ ] Verify all routes: `rails routes | grep api`
+- [ ] Document API endpoints in API_ROUTES.md
 
 ### Customers Controller
 - [ ] Create `app/controllers/api/v1/customers_controller.rb`
@@ -531,8 +880,17 @@
 
 ### Refunds Controller
 - [ ] Create `app/controllers/api/v1/refunds_controller.rb`
-  - [ ] create: Issue refund
+  - [ ] create: Issue refund (full or partial)
   - [ ] show: Get refund details
+  - [ ] Strong params for amount_cents, reason
+- [ ] Write request specs
+
+### Credits Controller
+- [ ] Create `app/controllers/api/v1/customers/credits_controller.rb`
+  - [ ] create: Apply account credit to customer
+  - [ ] Requires admin/finance role
+  - [ ] Creates credit ledger entry
+  - [ ] Audit log who issued credit
 - [ ] Write request specs
 
 ### Usage Events Controller
@@ -551,7 +909,37 @@
   - [ ] mrr: Monthly recurring revenue
   - [ ] revenue_recognition: Revenue recognition report
   - [ ] ledger_export: Export ledger as CSV
+- [ ] Create `app/controllers/api/v1/reports/ledger_controller.rb`
+  - [ ] index: List ledger entries (paginated, filterable)
+  - [ ] export: Generate CSV export (async for large datasets)
 - [ ] Write request specs
+
+### Reporting Services
+- [ ] Create `app/services/reports/mrr_calculator_service.rb`
+  - [ ] Calculate current MRR by plan
+  - [ ] New MRR (subscriptions created this month)
+  - [ ] Churned MRR (subscriptions canceled this month)
+  - [ ] Expansion MRR (upgrades - downgrades)
+  - [ ] Group by currency
+  - [ ] Cache results (5 minutes)
+  - [ ] Write spec
+- [ ] Create `app/services/reports/revenue_recognition_service.rb`
+  - [ ] Calculate earned vs deferred revenue
+  - [ ] Based on subscription periods
+  - [ ] Monthly breakdown
+  - [ ] ASC 606 compliant
+  - [ ] Write spec
+- [ ] Create `app/services/reports/ledger_exporter_service.rb`
+  - [ ] Export ledger entries as CSV
+  - [ ] Filter by date range, customer, entry type
+  - [ ] Include all metadata
+  - [ ] For large exports (>10k rows), use background job
+  - [ ] Write spec
+- [ ] Create `app/jobs/reports/export_job.rb`
+  - [ ] Generate large exports asynchronously
+  - [ ] Store in cloud storage
+  - [ ] Email download link (or webhook notification)
+  - [ ] Signed URL expires in 1 hour
 
 ### Webhooks Inbound Controller
 - [ ] Create `app/controllers/webhooks/inbound_controller.rb`
