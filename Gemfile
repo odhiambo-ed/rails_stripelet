@@ -46,6 +46,7 @@ gem "pundit", "~> 2.5"
 
 gem "bcrypt", "~> 3.1", ">= 3.1.12"
 
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
@@ -55,4 +56,16 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
+
+  gem "rspec-rails", "~> 8.0", ">= 8.0.1"
+
+  gem "factory_bot_rails", "~> 6.4", ">= 6.4.4"
+
+  gem "faker", "~> 3.4", ">= 3.4.2"
+
+  gem "database_cleaner-active_record", "~> 2.1"
+
+  gem "shoulda-matchers", "~> 6.2"
+
+  gem "simplecov", "~> 0.22.0"
 end
