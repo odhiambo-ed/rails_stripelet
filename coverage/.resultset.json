@@ -82,6 +82,51 @@
         "lines": [
           0,
           0,
+          null,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0
+        ],
+        "branches": {}
+      },
+      "/Users/odhiamboed/Desktop/JCDev/Rails/Stripelet/rails_stripelet/app/models/invoice_line_item.rb": {
+        "lines": [
+          0,
           0,
           0
         ],
@@ -201,6 +246,6 @@
         "branches": {}
       }
     },
-    "timestamp": 1767561673
+    "timestamp": 1767562051
   }
 }
