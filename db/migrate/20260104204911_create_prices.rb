@@ -19,7 +19,6 @@ class CreatePrices < ActiveRecord::Migration[8.0]
     # Indexes
     # =====================
     add_index :prices, :price_id, unique: true
-    add_index :prices, :product_id
     add_index :prices, :currency
     add_index :prices, :active
     add_index :prices, [ :product_id, :currency ]
