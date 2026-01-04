@@ -13,7 +13,7 @@
       <img src="./assets/0.13.2/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2026-01-05T00:10:36+03:00">2026-01-05T00:10:36+03:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2026-01-05T00:18:33+03:00">2026-01-05T00:18:33+03:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -42,9 +42,9 @@
   </div>
 
   <div class="t-line-summary">
-    <b>87</b> relevant lines,
+    <b>106</b> relevant lines,
     <span class="green"><b>0</b> lines covered</span> and
-    <span class="red"><b>87</b> lines missed. </span>
+    <span class="red"><b>106</b> lines missed. </span>
     (<span class="red">
   0.0%
 </span>
@@ -171,10 +171,10 @@
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#59a6bf6511b728e9a9280bd301a2f58ff1166403" class="src_link" title="app/models/subscription.rb">app/models/subscription.rb</a></td>
             <td class="red strong cell--number t-file__coverage">0.00 %</td>
-            <td class="cell--number">4</td>
-            <td class="cell--number">4</td>
+            <td class="cell--number">29</td>
+            <td class="cell--number">23</td>
             <td class="cell--number">0</td>
-            <td class="cell--number">4</td>
+            <td class="cell--number">23</td>
             <td class="cell--number">0.00</td>
             
           </tr>
@@ -349,9 +349,9 @@
   </div>
 
   <div class="t-line-summary">
-    <b>64</b> relevant lines,
+    <b>83</b> relevant lines,
     <span class="green"><b>0</b> lines covered</span> and
-    <span class="red"><b>64</b> lines missed. </span>
+    <span class="red"><b>83</b> lines missed. </span>
     (<span class="red">
   0.0%
 </span>
@@ -445,10 +445,10 @@
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#59a6bf6511b728e9a9280bd301a2f58ff1166403" class="src_link" title="app/models/subscription.rb">app/models/subscription.rb</a></td>
             <td class="red strong cell--number t-file__coverage">0.00 %</td>
-            <td class="cell--number">4</td>
-            <td class="cell--number">4</td>
+            <td class="cell--number">29</td>
+            <td class="cell--number">23</td>
             <td class="cell--number">0</td>
-            <td class="cell--number">4</td>
+            <td class="cell--number">23</td>
             <td class="cell--number">0.00</td>
             
           </tr>
@@ -1985,9 +1985,9 @@
     
 
     <div class="t-line-summary">
-      <b>4</b> relevant lines.
+      <b>23</b> relevant lines.
       <span class="green"><b>0</b> lines covered</span> and
-      <span class="red"><b>4</b> lines missed.</span>
+      <span class="red"><b>23</b> lines missed.</span>
     </div>
 
     
@@ -2013,12 +2013,52 @@
 
             
 
+            <code class="ruby">  include Identifiable</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="3">
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="4">
+            
+
+            
+
+            <code class="ruby">  enum :status, { trialing: &quot;trialing&quot;, active: &quot;active&quot;, past_due: &quot;past_due&quot;, canceled: &quot;canceled&quot;, paused: &quot;paused&quot; }, prefix: true</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="5">
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="6">
+            
+
+            
+
             <code class="ruby">  belongs_to :customer</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="3">
+          <li class="missed" data-hits="0" data-linenumber="7">
             
 
             
@@ -2028,7 +2068,217 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="4">
+          <li class="missed" data-hits="0" data-linenumber="8">
+            
+
+            
+
+            <code class="ruby">  has_many :invoices, dependent: :destroy</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="9">
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="10">
+            
+
+            
+
+            <code class="ruby">  validates :subscription_id, uniqueness: true</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="11">
+            
+
+            
+
+            <code class="ruby">  validates :status, presence: true</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="12">
+            
+
+            
+
+            <code class="ruby">  validates :current_period_start, presence: true</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="13">
+            
+
+            
+
+            <code class="ruby">  validates :current_period_end, presence: true</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="14">
+            
+
+            
+
+            <code class="ruby">  validates :next_billing_date, presence: true</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="15">
+            
+
+            
+
+            <code class="ruby">  validates :customer_id, presence: true</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="16">
+            
+
+            
+
+            <code class="ruby">  validates :price_id, presence: true</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="17">
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="18">
+            
+
+            
+
+            <code class="ruby">  scope :active, -&gt; { where(status: &quot;active&quot;, deleted_at: nil) }</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="19">
+            
+
+            
+
+            <code class="ruby">  scope :trialing, -&gt; { where(status: &quot;trialing&quot;, deleted_at: nil) }</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="20">
+            
+
+            
+
+            <code class="ruby">  scope :due_for_renewal, -&gt; { where(&quot;next_billing_date &lt;= ? AND status IN (?, ?)&quot;, Date.current, &quot;active&quot;, &quot;trialing&quot;).where(deleted_at: nil) }</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="21">
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="22">
+            
+
+            
+
+            <code class="ruby">  def in_trial?</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="23">
+            
+
+            
+
+            <code class="ruby">    status_trialing? &amp;&amp; trial_end_at.present? &amp;&amp; trial_end_at &gt; Time.current</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="24">
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="25">
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="26">
+            
+
+            
+
+            <code class="ruby">  def days_until_renewal</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="27">
+            
+
+            
+
+            <code class="ruby">    (next_billing_date - Date.current).to_i</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="28">
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="29">
             
 
             
