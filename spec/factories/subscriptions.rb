@@ -1,16 +1,38 @@
 FactoryBot.define do
   factory :subscription do
-    subscription_id { "MyString" }
-    customer { nil }
-    price { nil }
-    status { "MyString" }
-    current_period_start { "2026-01-05" }
-    current_period_end { "2026-01-05" }
-    trial_start_at { "2026-01-05 00:10:36" }
-    trial_end_at { "2026-01-05 00:10:36" }
-    cancel_at { "2026-01-05 00:10:36" }
-    canceled_at { "2026-01-05 00:10:36" }
-    next_billing_date { "2026-01-05" }
-    metadata { "" }
+    customer { association :customer }
+    price { association :price }
+    status { 'trialing' }
+    current_period_start { Date.current }
+    current_period_end { 30.days.from_now.to_date }
+    trial_start_at { Time.current }
+    trial_end_at { 14.days.from_now }
+    cancel_at { nil }
+    canceled_at { nil }
+    next_billing_date { 14.days.from_now.to_date }
+    metadata { {} }
+    deleted_at { nil }
+
+    trait :active do
+      status { 'active' }
+      trial_start_at { nil }
+      trial_end_at { nil }
+    end
+
+    trait :with_trial do
+      status { 'trialing' }
+      trial_start_at { Time.current }
+      trial_end_at { 14.days.from_now }
+    end
+
+    trait :canceled do
+      status { 'canceled' }
+      canceled_at { Time.current }
+    end
+
+    trait :past_due do
+      status { 'past_due' }
+      next_billing_date { 5.days.ago.to_date }
+    end
   end
 end
