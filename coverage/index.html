@@ -13,7 +13,7 @@
       <img src="./assets/0.13.2/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2026-01-04T23:49:11+03:00">2026-01-04T23:49:11+03:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2026-01-05T00:10:36+03:00">2026-01-05T00:10:36+03:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -38,13 +38,13 @@
   <a name="AllFiles"></a>
 
   <div>
-    <b>10</b> files in total.
+    <b>11</b> files in total.
   </div>
 
   <div class="t-line-summary">
-    <b>70</b> relevant lines,
+    <b>87</b> relevant lines,
     <span class="green"><b>0</b> lines covered</span> and
-    <span class="red"><b>70</b> lines missed. </span>
+    <span class="red"><b>87</b> lines missed. </span>
     (<span class="red">
   0.0%
 </span>
@@ -149,10 +149,10 @@
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#fbb02f30b90571179113c835909cff4395e915c2" class="src_link" title="app/models/price.rb">app/models/price.rb</a></td>
             <td class="red strong cell--number t-file__coverage">0.00 %</td>
-            <td class="cell--number">3</td>
-            <td class="cell--number">3</td>
+            <td class="cell--number">20</td>
+            <td class="cell--number">16</td>
             <td class="cell--number">0</td>
-            <td class="cell--number">3</td>
+            <td class="cell--number">16</td>
             <td class="cell--number">0.00</td>
             
           </tr>
@@ -164,6 +164,17 @@
             <td class="cell--number">7</td>
             <td class="cell--number">0</td>
             <td class="cell--number">7</td>
+            <td class="cell--number">0.00</td>
+            
+          </tr>
+        
+          <tr class="t-file">
+            <td class="strong t-file__name"><a href="#59a6bf6511b728e9a9280bd301a2f58ff1166403" class="src_link" title="app/models/subscription.rb">app/models/subscription.rb</a></td>
+            <td class="red strong cell--number t-file__coverage">0.00 %</td>
+            <td class="cell--number">4</td>
+            <td class="cell--number">4</td>
+            <td class="cell--number">0</td>
+            <td class="cell--number">4</td>
             <td class="cell--number">0.00</td>
             
           </tr>
@@ -334,13 +345,13 @@
   <a name="Models"></a>
 
   <div>
-    <b>6</b> files in total.
+    <b>7</b> files in total.
   </div>
 
   <div class="t-line-summary">
-    <b>47</b> relevant lines,
+    <b>64</b> relevant lines,
     <span class="green"><b>0</b> lines covered</span> and
-    <span class="red"><b>47</b> lines missed. </span>
+    <span class="red"><b>64</b> lines missed. </span>
     (<span class="red">
   0.0%
 </span>
@@ -412,10 +423,10 @@
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#fbb02f30b90571179113c835909cff4395e915c2" class="src_link" title="app/models/price.rb">app/models/price.rb</a></td>
             <td class="red strong cell--number t-file__coverage">0.00 %</td>
-            <td class="cell--number">3</td>
-            <td class="cell--number">3</td>
+            <td class="cell--number">20</td>
+            <td class="cell--number">16</td>
             <td class="cell--number">0</td>
-            <td class="cell--number">3</td>
+            <td class="cell--number">16</td>
             <td class="cell--number">0.00</td>
             
           </tr>
@@ -427,6 +438,17 @@
             <td class="cell--number">7</td>
             <td class="cell--number">0</td>
             <td class="cell--number">7</td>
+            <td class="cell--number">0.00</td>
+            
+          </tr>
+        
+          <tr class="t-file">
+            <td class="strong t-file__name"><a href="#59a6bf6511b728e9a9280bd301a2f58ff1166403" class="src_link" title="app/models/subscription.rb">app/models/subscription.rb</a></td>
+            <td class="red strong cell--number t-file__coverage">0.00 %</td>
+            <td class="cell--number">4</td>
+            <td class="cell--number">4</td>
+            <td class="cell--number">0</td>
+            <td class="cell--number">4</td>
             <td class="cell--number">0.00</td>
             
           </tr>
@@ -1601,9 +1623,9 @@
     
 
     <div class="t-line-summary">
-      <b>3</b> relevant lines.
+      <b>16</b> relevant lines.
       <span class="green"><b>0</b> lines covered</span> and
-      <span class="red"><b>3</b> lines missed.</span>
+      <span class="red"><b>16</b> lines missed.</span>
     </div>
 
     
@@ -1629,12 +1651,182 @@
 
             
 
+            <code class="ruby">  include Identifiable</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="3">
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="4">
+            
+
+            
+
+            <code class="ruby">  enum :currency, { usd: &quot;usd&quot;, eur: &quot;eur&quot;, gbp: &quot;gbp&quot;, jpy: &quot;jpy&quot; }, prefix: true</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="5">
+            
+
+            
+
+            <code class="ruby">  enum :interval, { day: &quot;day&quot;, week: &quot;week&quot;, month: &quot;month&quot;, year: &quot;year&quot; }, prefix: true</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="6">
+            
+
+            
+
+            <code class="ruby">  enum :billing_scheme, { per_unit: &quot;per_unit&quot;, tiered: &quot;tiered&quot; }, prefix: true</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="7">
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="8">
+            
+
+            
+
             <code class="ruby">  belongs_to :product</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="3">
+          <li class="missed" data-hits="0" data-linenumber="9">
+            
+
+            
+
+            <code class="ruby">  has_many :subscriptions, dependent: :nullify</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="10">
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="11">
+            
+
+            
+
+            <code class="ruby">  validates :price_id, uniqueness: true</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="12">
+            
+
+            
+
+            <code class="ruby">  validates :amount_cents, presence: true, numericality: { greater_than: 0 }</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="13">
+            
+
+            
+
+            <code class="ruby">  validates :currency, presence: true</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="14">
+            
+
+            
+
+            <code class="ruby">  validates :interval, presence: true</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="15">
+            
+
+            
+
+            <code class="ruby">  validates :interval_count, presence: true, numericality: { greater_than: 0 }</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="16">
+            
+
+            
+
+            <code class="ruby">  validates :billing_scheme, presence: true</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="17">
+            
+
+            
+
+            <code class="ruby">  validates :product_id, presence: true</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="18">
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="19">
+            
+
+            
+
+            <code class="ruby">  scope :active, -&gt; { where(active: true, deleted_at: nil) }</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="20">
             
 
             
@@ -1766,6 +1958,77 @@
       
         <div>
           <li class="missed" data-hits="0" data-linenumber="10">
+            
+
+            
+
+            <code class="ruby">end</code>
+          </li>
+        </div>
+      
+    </ol>
+  </pre>
+</div>
+
+      
+        <div class="source_table" id="59a6bf6511b728e9a9280bd301a2f58ff1166403">
+  <div class="header">
+    <h3>app/models/subscription.rb</h3>
+    <h4>
+      <span class="red">
+  0.0%
+</span>
+
+      lines covered
+    </h4>
+
+    
+
+    <div class="t-line-summary">
+      <b>4</b> relevant lines.
+      <span class="green"><b>0</b> lines covered</span> and
+      <span class="red"><b>4</b> lines missed.</span>
+    </div>
+
+    
+
+  </div>
+
+  <pre>
+    <ol>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="1">
+            
+
+            
+
+            <code class="ruby">class Subscription &lt; ApplicationRecord</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="2">
+            
+
+            
+
+            <code class="ruby">  belongs_to :customer</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="3">
+            
+
+            
+
+            <code class="ruby">  belongs_to :price</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="4">
             
 
             
