@@ -42,7 +42,7 @@ RSpec.describe Customer, type: :model do
   end
 
   describe 'enums' do
-    it { is_expected.to define_enum_for(:currency).with_values(usd: 'usd', eur: 'eur', gbp: 'gbp', jpy: 'jpy') }
+    it { is_expected.to define_enum_for(:currency).with_values(usd: 'usd', eur: 'eur', gbp: 'gbp', jpy: 'jpy').backed_by_column_of_type(:string) }
   end
 
   describe '#generate_external_id' do

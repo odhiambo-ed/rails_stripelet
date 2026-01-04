@@ -8,7 +8,11 @@ module Identifiable
   private
 
   def generate_external_id
-    prefix = self.class.name.downcase[0..2]
-    self.send("#{prefix[0..2]}_id=", "#{prefix}_#{SecureRandom.hex(12)}")
+    # Extract model name (e.g., "Customer" -> "customer", "Invoice" -> "invoice")
+    model_name = self.class.name.demodulize.underscore
+    prefix = model_name[0..2]
+
+    # Set the external ID (e.g., customer_id, invoice_id)
+    self.send("#{model_name}_id=", "#{prefix}_#{SecureRandom.hex(12)}")
   end
 end

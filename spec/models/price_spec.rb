@@ -65,9 +65,9 @@ RSpec.describe Price, type: :model do
   end
 
   describe 'enums' do
-    it { is_expected.to define_enum_for(:currency).with_values(usd: 'usd', eur: 'eur', gbp: 'gbp', jpy: 'jpy') }
-    it { is_expected.to define_enum_for(:interval).with_values(day: 'day', week: 'week', month: 'month', year: 'year') }
-    it { is_expected.to define_enum_for(:billing_scheme).with_values(per_unit: 'per_unit', tiered: 'tiered') }
+    it { is_expected.to define_enum_for(:currency).with_values(usd: 'usd', eur: 'eur', gbp: 'gbp', jpy: 'jpy').backed_by_column_of_type(:string) }
+    it { is_expected.to define_enum_for(:interval).with_values(day: 'day', week: 'week', month: 'month', year: 'year').backed_by_column_of_type(:string) }
+    it { is_expected.to define_enum_for(:billing_scheme).with_values(per_unit: 'per_unit', tiered: 'tiered').backed_by_column_of_type(:string) }
   end
 
   describe '#generate_external_id' do

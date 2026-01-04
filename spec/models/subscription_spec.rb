@@ -29,7 +29,7 @@ RSpec.describe Subscription, type: :model do
   end
 
   describe 'enums' do
-    it { is_expected.to define_enum_for(:status).with_values(trialing: 'trialing', active: 'active', past_due: 'past_due', canceled: 'canceled', paused: 'paused') }
+    it { is_expected.to define_enum_for(:status).with_values(trialing: 'trialing', active: 'active', past_due: 'past_due', canceled: 'canceled', paused: 'paused').backed_by_column_of_type(:string) }
   end
 
   describe '#generate_external_id' do

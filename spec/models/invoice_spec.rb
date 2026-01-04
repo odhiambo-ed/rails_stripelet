@@ -59,8 +59,8 @@ RSpec.describe Invoice, type: :model do
   end
 
   describe 'enums' do
-    it { is_expected.to define_enum_for(:status).with_values(draft: 'draft', open: 'open', paid: 'paid', void: 'void', uncollectible: 'uncollectible', partially_refunded: 'partially_refunded', refunded: 'refunded') }
-    it { is_expected.to define_enum_for(:currency).with_values(usd: 'usd', eur: 'eur', gbp: 'gbp', jpy: 'jpy') }
+    it { is_expected.to define_enum_for(:status).with_values(draft: 'draft', open: 'open', paid: 'paid', void: 'void', uncollectible: 'uncollectible', partially_refunded: 'partially_refunded', refunded: 'refunded').backed_by_column_of_type(:string) }
+    it { is_expected.to define_enum_for(:currency).with_values(usd: 'usd', eur: 'eur', gbp: 'gbp', jpy: 'jpy').backed_by_column_of_type(:string) }
   end
 
   describe '#generate_external_id' do

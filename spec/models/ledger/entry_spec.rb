@@ -26,8 +26,8 @@ RSpec.describe Ledger::Entry, type: :model do
   end
 
   describe 'enums' do
-    it { is_expected.to define_enum_for(:entry_type).with_values(credit: 'credit', debit: 'debit', refund: 'refund', adjustment: 'adjustment', fee: 'fee') }
-    it { is_expected.to define_enum_for(:currency).with_values(usd: 'usd', eur: 'eur', gbp: 'gbp', jpy: 'jpy') }
+    it { is_expected.to define_enum_for(:entry_type).with_values(credit: 'credit', debit: 'debit', refund: 'refund', adjustment: 'adjustment', fee: 'fee').backed_by_column_of_type(:string) }
+    it { is_expected.to define_enum_for(:currency).with_values(usd: 'usd', eur: 'eur', gbp: 'gbp', jpy: 'jpy').backed_by_column_of_type(:string) }
   end
 
   describe 'scopes' do
