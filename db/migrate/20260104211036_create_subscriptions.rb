@@ -22,7 +22,6 @@ class CreateSubscriptions < ActiveRecord::Migration[8.0]
     # Indexes
     # =====================
     add_index :subscriptions, :subscription_id, unique: true
-    add_index :subscriptions, :customer_id
     add_index :subscriptions, :status
 
     # Partial indexes on status for performance

@@ -17,7 +17,6 @@ class CreateInvoiceLineItems < ActiveRecord::Migration[8.0]
     # =====================
     # Indexes
     # =====================
-    add_index :invoice_line_items, :invoice_id
     add_index :invoice_line_items, :currency
 
     # =====================

@@ -28,8 +28,6 @@ class CreateInvoices < ActiveRecord::Migration[8.0]
     # Indexes
     # =====================
     add_index :invoices, :invoice_id, unique: true
-    add_index :invoices, :customer_id
-    add_index :invoices, :subscription_id
     add_index :invoices, :status
     add_index :invoices, :created_at
     add_index :invoices, [ :customer_id, :status ]
