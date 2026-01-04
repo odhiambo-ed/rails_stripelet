@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns='http://www.w3.org/1999/xhtml'>
   <head>
-    <title>Code coverage for Rails stripelet</title>
+    <title>Code coverage for Rails</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <script src='./assets/0.13.2/application.js' type='text/javascript'></script>
     <link href='./assets/0.13.2/application.css' media='screen, projection, print' rel='stylesheet' type='text/css' />
@@ -13,7 +13,7 @@
       <img src="./assets/0.13.2/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2026-01-04T03:41:35+03:00">2026-01-04T03:41:35+03:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2026-01-04T19:15:14+00:00">2026-01-04T19:15:14+00:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -22,14 +22,14 @@
     <span class="group_name">All Files</span>
     (<span class="covered_percent">
       <span class="red">
-  0.0%
+  46.81%
 </span>
 
      </span>
      covered at
      <span class="covered_strength">
        <span class="red">
-         0.0
+         0.47
        </span>
     </span> hits/line
     )
@@ -38,15 +38,15 @@
   <a name="AllFiles"></a>
 
   <div>
-    <b>5</b> files in total.
+    <b>8</b> files in total.
   </div>
 
   <div class="t-line-summary">
-    <b>13</b> relevant lines,
-    <span class="green"><b>0</b> lines covered</span> and
-    <span class="red"><b>13</b> lines missed. </span>
+    <b>47</b> relevant lines,
+    <span class="green"><b>22</b> lines covered</span> and
+    <span class="red"><b>25</b> lines missed. </span>
     (<span class="red">
-  0.0%
+  46.81%
 </span>
 )
   </div>
@@ -70,7 +70,7 @@
       <tbody>
         
           <tr class="t-file">
-            <td class="strong t-file__name"><a href="#56d0301a2fee1740e397db29561f5b4134459af0" class="src_link" title="app/controllers/application_controller.rb">app/controllers/application_controller.rb</a></td>
+            <td class="strong t-file__name"><a href="#61650a55c98c77a750ec98ebc9f718ce07225d3a" class="src_link" title="app/controllers/application_controller.rb">app/controllers/application_controller.rb</a></td>
             <td class="red strong cell--number t-file__coverage">0.00 %</td>
             <td class="cell--number">2</td>
             <td class="cell--number">2</td>
@@ -81,7 +81,7 @@
           </tr>
         
           <tr class="t-file">
-            <td class="strong t-file__name"><a href="#ca2e52d8a8f6e6c9ef5594dbf6d70d56a18b79a2" class="src_link" title="app/jobs/application_job.rb">app/jobs/application_job.rb</a></td>
+            <td class="strong t-file__name"><a href="#65ace9ccfddcde797a6445505cfc9b82e7422aaf" class="src_link" title="app/jobs/application_job.rb">app/jobs/application_job.rb</a></td>
             <td class="red strong cell--number t-file__coverage">0.00 %</td>
             <td class="cell--number">7</td>
             <td class="cell--number">2</td>
@@ -92,7 +92,7 @@
           </tr>
         
           <tr class="t-file">
-            <td class="strong t-file__name"><a href="#4623cf7b5dc6d1de7b748f7f44f1ba49e30b9f27" class="src_link" title="app/mailers/application_mailer.rb">app/mailers/application_mailer.rb</a></td>
+            <td class="strong t-file__name"><a href="#63644eff4b977a8354c67e0ac15c2e58e3dae10a" class="src_link" title="app/mailers/application_mailer.rb">app/mailers/application_mailer.rb</a></td>
             <td class="red strong cell--number t-file__coverage">0.00 %</td>
             <td class="cell--number">4</td>
             <td class="cell--number">4</td>
@@ -103,24 +103,57 @@
           </tr>
         
           <tr class="t-file">
-            <td class="strong t-file__name"><a href="#1d51cc53c48d5077b70471268bab6b668d64d25d" class="src_link" title="app/models/application_record.rb">app/models/application_record.rb</a></td>
-            <td class="red strong cell--number t-file__coverage">0.00 %</td>
+            <td class="strong t-file__name"><a href="#79315e82a0abe60e2be92c5c45e8abae3a0d788d" class="src_link" title="app/models/application_record.rb">app/models/application_record.rb</a></td>
+            <td class="green strong cell--number t-file__coverage">100.00 %</td>
             <td class="cell--number">3</td>
-            <td class="cell--number">3</td>
+            <td class="cell--number">2</td>
+            <td class="cell--number">2</td>
             <td class="cell--number">0</td>
-            <td class="cell--number">3</td>
+            <td class="cell--number">1.00</td>
+            
+          </tr>
+        
+          <tr class="t-file">
+            <td class="strong t-file__name"><a href="#e65faf4ebdf729833b33ea012a6cba7e29e81108" class="src_link" title="app/models/concerns/identifiable.rb">app/models/concerns/identifiable.rb</a></td>
+            <td class="red strong cell--number t-file__coverage">75.00 %</td>
+            <td class="cell--number">14</td>
+            <td class="cell--number">8</td>
+            <td class="cell--number">6</td>
+            <td class="cell--number">2</td>
+            <td class="cell--number">0.75</td>
+            
+          </tr>
+        
+          <tr class="t-file">
+            <td class="strong t-file__name"><a href="#2ebc1bb4cafd2ebadb6437ffa65ee1c0f7146421" class="src_link" title="app/models/customer.rb">app/models/customer.rb</a></td>
+            <td class="green strong cell--number t-file__coverage">90.91 %</td>
+            <td class="cell--number">17</td>
+            <td class="cell--number">11</td>
+            <td class="cell--number">10</td>
+            <td class="cell--number">1</td>
+            <td class="cell--number">0.91</td>
+            
+          </tr>
+        
+          <tr class="t-file">
+            <td class="strong t-file__name"><a href="#f663f9c7f3765183aed0807f292d64fced50f9b5" class="src_link" title="app/models/ledger/entry.rb">app/models/ledger/entry.rb</a></td>
+            <td class="red strong cell--number t-file__coverage">0.00 %</td>
+            <td class="cell--number">13</td>
+            <td class="cell--number">10</td>
+            <td class="cell--number">0</td>
+            <td class="cell--number">10</td>
             <td class="cell--number">0.00</td>
             
           </tr>
         
           <tr class="t-file">
-            <td class="strong t-file__name"><a href="#e0fd11fd90146851d9e89d0d8ee9ab5dae9dc7e1" class="src_link" title="app/models/customer.rb">app/models/customer.rb</a></td>
-            <td class="red strong cell--number t-file__coverage">0.00 %</td>
-            <td class="cell--number">2</td>
-            <td class="cell--number">2</td>
-            <td class="cell--number">0</td>
-            <td class="cell--number">2</td>
-            <td class="cell--number">0.00</td>
+            <td class="strong t-file__name"><a href="#487514412a81b098be9e464839a4ac929143bfce" class="src_link" title="app/services/ledger/calculate_balance_service.rb">app/services/ledger/calculate_balance_service.rb</a></td>
+            <td class="red strong cell--number t-file__coverage">50.00 %</td>
+            <td class="cell--number">16</td>
+            <td class="cell--number">8</td>
+            <td class="cell--number">4</td>
+            <td class="cell--number">4</td>
+            <td class="cell--number">0.50</td>
             
           </tr>
         
@@ -184,7 +217,7 @@
       <tbody>
         
           <tr class="t-file">
-            <td class="strong t-file__name"><a href="#56d0301a2fee1740e397db29561f5b4134459af0" class="src_link" title="app/controllers/application_controller.rb">app/controllers/application_controller.rb</a></td>
+            <td class="strong t-file__name"><a href="#61650a55c98c77a750ec98ebc9f718ce07225d3a" class="src_link" title="app/controllers/application_controller.rb">app/controllers/application_controller.rb</a></td>
             <td class="red strong cell--number t-file__coverage">0.00 %</td>
             <td class="cell--number">2</td>
             <td class="cell--number">2</td>
@@ -263,14 +296,14 @@
     <span class="group_name">Models</span>
     (<span class="covered_percent">
       <span class="red">
-  0.0%
+  58.06%
 </span>
 
      </span>
      covered at
      <span class="covered_strength">
        <span class="red">
-         0.0
+         0.58
        </span>
     </span> hits/line
     )
@@ -279,15 +312,15 @@
   <a name="Models"></a>
 
   <div>
-    <b>2</b> files in total.
+    <b>4</b> files in total.
   </div>
 
   <div class="t-line-summary">
-    <b>5</b> relevant lines,
-    <span class="green"><b>0</b> lines covered</span> and
-    <span class="red"><b>5</b> lines missed. </span>
+    <b>31</b> relevant lines,
+    <span class="green"><b>18</b> lines covered</span> and
+    <span class="red"><b>13</b> lines missed. </span>
     (<span class="red">
-  0.0%
+  58.06%
 </span>
 )
   </div>
@@ -311,23 +344,45 @@
       <tbody>
         
           <tr class="t-file">
-            <td class="strong t-file__name"><a href="#1d51cc53c48d5077b70471268bab6b668d64d25d" class="src_link" title="app/models/application_record.rb">app/models/application_record.rb</a></td>
-            <td class="red strong cell--number t-file__coverage">0.00 %</td>
+            <td class="strong t-file__name"><a href="#79315e82a0abe60e2be92c5c45e8abae3a0d788d" class="src_link" title="app/models/application_record.rb">app/models/application_record.rb</a></td>
+            <td class="green strong cell--number t-file__coverage">100.00 %</td>
             <td class="cell--number">3</td>
-            <td class="cell--number">3</td>
+            <td class="cell--number">2</td>
+            <td class="cell--number">2</td>
             <td class="cell--number">0</td>
-            <td class="cell--number">3</td>
-            <td class="cell--number">0.00</td>
+            <td class="cell--number">1.00</td>
             
           </tr>
         
           <tr class="t-file">
-            <td class="strong t-file__name"><a href="#e0fd11fd90146851d9e89d0d8ee9ab5dae9dc7e1" class="src_link" title="app/models/customer.rb">app/models/customer.rb</a></td>
+            <td class="strong t-file__name"><a href="#e65faf4ebdf729833b33ea012a6cba7e29e81108" class="src_link" title="app/models/concerns/identifiable.rb">app/models/concerns/identifiable.rb</a></td>
+            <td class="red strong cell--number t-file__coverage">75.00 %</td>
+            <td class="cell--number">14</td>
+            <td class="cell--number">8</td>
+            <td class="cell--number">6</td>
+            <td class="cell--number">2</td>
+            <td class="cell--number">0.75</td>
+            
+          </tr>
+        
+          <tr class="t-file">
+            <td class="strong t-file__name"><a href="#2ebc1bb4cafd2ebadb6437ffa65ee1c0f7146421" class="src_link" title="app/models/customer.rb">app/models/customer.rb</a></td>
+            <td class="green strong cell--number t-file__coverage">90.91 %</td>
+            <td class="cell--number">17</td>
+            <td class="cell--number">11</td>
+            <td class="cell--number">10</td>
+            <td class="cell--number">1</td>
+            <td class="cell--number">0.91</td>
+            
+          </tr>
+        
+          <tr class="t-file">
+            <td class="strong t-file__name"><a href="#f663f9c7f3765183aed0807f292d64fced50f9b5" class="src_link" title="app/models/ledger/entry.rb">app/models/ledger/entry.rb</a></td>
             <td class="red strong cell--number t-file__coverage">0.00 %</td>
-            <td class="cell--number">2</td>
-            <td class="cell--number">2</td>
+            <td class="cell--number">13</td>
+            <td class="cell--number">10</td>
             <td class="cell--number">0</td>
-            <td class="cell--number">2</td>
+            <td class="cell--number">10</td>
             <td class="cell--number">0.00</td>
             
           </tr>
@@ -391,7 +446,7 @@
       <tbody>
         
           <tr class="t-file">
-            <td class="strong t-file__name"><a href="#4623cf7b5dc6d1de7b748f7f44f1ba49e30b9f27" class="src_link" title="app/mailers/application_mailer.rb">app/mailers/application_mailer.rb</a></td>
+            <td class="strong t-file__name"><a href="#63644eff4b977a8354c67e0ac15c2e58e3dae10a" class="src_link" title="app/mailers/application_mailer.rb">app/mailers/application_mailer.rb</a></td>
             <td class="red strong cell--number t-file__coverage">0.00 %</td>
             <td class="cell--number">4</td>
             <td class="cell--number">4</td>
@@ -518,7 +573,7 @@
       <tbody>
         
           <tr class="t-file">
-            <td class="strong t-file__name"><a href="#ca2e52d8a8f6e6c9ef5594dbf6d70d56a18b79a2" class="src_link" title="app/jobs/application_job.rb">app/jobs/application_job.rb</a></td>
+            <td class="strong t-file__name"><a href="#65ace9ccfddcde797a6445505cfc9b82e7422aaf" class="src_link" title="app/jobs/application_job.rb">app/jobs/application_job.rb</a></td>
             <td class="red strong cell--number t-file__coverage">0.00 %</td>
             <td class="cell--number">7</td>
             <td class="cell--number">2</td>
@@ -592,6 +647,75 @@
 </div>
 
         
+          <div class="file_list_container" id="Ungrouped">
+  <h2>
+    <span class="group_name">Ungrouped</span>
+    (<span class="covered_percent">
+      <span class="red">
+  50.0%
+</span>
+
+     </span>
+     covered at
+     <span class="covered_strength">
+       <span class="red">
+         0.5
+       </span>
+    </span> hits/line
+    )
+  </h2>
+
+  <a name="Ungrouped"></a>
+
+  <div>
+    <b>1</b> files in total.
+  </div>
+
+  <div class="t-line-summary">
+    <b>8</b> relevant lines,
+    <span class="green"><b>4</b> lines covered</span> and
+    <span class="red"><b>4</b> lines missed. </span>
+    (<span class="red">
+  50.0%
+</span>
+)
+  </div>
+
+  
+
+  <div class="file_list--responsive">
+    <table class="file_list">
+      <thead>
+        <tr>
+          <th>File</th>
+          <th class="cell--number">% covered</th>
+          <th class="cell--number">Lines</th>
+          <th class="cell--number">Relevant Lines</th>
+          <th class="cell--number">Lines covered</th>
+          <th class="cell--number">Lines missed</th>
+          <th class="cell--number">Avg. Hits / Line</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        
+          <tr class="t-file">
+            <td class="strong t-file__name"><a href="#487514412a81b098be9e464839a4ac929143bfce" class="src_link" title="app/services/ledger/calculate_balance_service.rb">app/services/ledger/calculate_balance_service.rb</a></td>
+            <td class="red strong cell--number t-file__coverage">50.00 %</td>
+            <td class="cell--number">16</td>
+            <td class="cell--number">8</td>
+            <td class="cell--number">4</td>
+            <td class="cell--number">4</td>
+            <td class="cell--number">0.50</td>
+            
+          </tr>
+        
+      </tbody>
+    </table>
+  </div>
+</div>
+
+        
       </div>
 
       <div id="footer">
@@ -602,7 +726,7 @@
 
       <div class="source_files">
       
-        <div class="source_table" id="56d0301a2fee1740e397db29561f5b4134459af0">
+        <div class="source_table" id="61650a55c98c77a750ec98ebc9f718ce07225d3a">
   <div class="header">
     <h3>app/controllers/application_controller.rb</h3>
     <h4>
@@ -653,7 +777,7 @@
 </div>
 
       
-        <div class="source_table" id="ca2e52d8a8f6e6c9ef5594dbf6d70d56a18b79a2">
+        <div class="source_table" id="65ace9ccfddcde797a6445505cfc9b82e7422aaf">
   <div class="header">
     <h3>app/jobs/application_job.rb</h3>
     <h4>
@@ -754,7 +878,7 @@
 </div>
 
       
-        <div class="source_table" id="4623cf7b5dc6d1de7b748f7f44f1ba49e30b9f27">
+        <div class="source_table" id="63644eff4b977a8354c67e0ac15c2e58e3dae10a">
   <div class="header">
     <h3>app/mailers/application_mailer.rb</h3>
     <h4>
@@ -825,12 +949,12 @@
 </div>
 
       
-        <div class="source_table" id="1d51cc53c48d5077b70471268bab6b668d64d25d">
+        <div class="source_table" id="79315e82a0abe60e2be92c5c45e8abae3a0d788d">
   <div class="header">
     <h3>app/models/application_record.rb</h3>
     <h4>
-      <span class="red">
-  0.0%
+      <span class="green">
+  100.0%
 </span>
 
       lines covered
@@ -839,9 +963,9 @@
     
 
     <div class="t-line-summary">
-      <b>3</b> relevant lines.
-      <span class="green"><b>0</b> lines covered</span> and
-      <span class="red"><b>3</b> lines missed.</span>
+      <b>2</b> relevant lines.
+      <span class="green"><b>2</b> lines covered</span> and
+      <span class="red"><b>0</b> lines missed.</span>
     </div>
 
     
@@ -852,7 +976,9 @@
     <ol>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="1">
+          <li class="covered" data-hits="1" data-linenumber="1">
+            
+              <span class="hits">1</span>
             
 
             
@@ -862,7 +988,9 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="2">
+          <li class="covered" data-hits="1" data-linenumber="2">
+            
+              <span class="hits">1</span>
             
 
             
@@ -872,7 +1000,7 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="3">
+          <li class="never" data-hits="" data-linenumber="3">
             
 
             
@@ -886,9 +1014,413 @@
 </div>
 
       
-        <div class="source_table" id="e0fd11fd90146851d9e89d0d8ee9ab5dae9dc7e1">
+        <div class="source_table" id="e65faf4ebdf729833b33ea012a6cba7e29e81108">
+  <div class="header">
+    <h3>app/models/concerns/identifiable.rb</h3>
+    <h4>
+      <span class="red">
+  75.0%
+</span>
+
+      lines covered
+    </h4>
+
+    
+
+    <div class="t-line-summary">
+      <b>8</b> relevant lines.
+      <span class="green"><b>6</b> lines covered</span> and
+      <span class="red"><b>2</b> lines missed.</span>
+    </div>
+
+    
+
+  </div>
+
+  <pre>
+    <ol>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="1">
+            
+              <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">module Identifiable</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="2">
+            
+              <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  extend ActiveSupport::Concern</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="3">
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="4">
+            
+              <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  included do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="5">
+            
+              <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    before_create :generate_external_id</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="6">
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="7">
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="8">
+            
+              <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  private</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="9">
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="10">
+            
+              <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  def generate_external_id</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="11">
+            
+
+            
+
+            <code class="ruby">    prefix = self.class.name.downcase[0..2]</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="12">
+            
+
+            
+
+            <code class="ruby">    self.send(&quot;#{prefix[0..2]}_id=&quot;, &quot;#{prefix}_#{SecureRandom.hex(12)}&quot;)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="13">
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="14">
+            
+
+            
+
+            <code class="ruby">end</code>
+          </li>
+        </div>
+      
+    </ol>
+  </pre>
+</div>
+
+      
+        <div class="source_table" id="2ebc1bb4cafd2ebadb6437ffa65ee1c0f7146421">
   <div class="header">
     <h3>app/models/customer.rb</h3>
+    <h4>
+      <span class="green">
+  90.91%
+</span>
+
+      lines covered
+    </h4>
+
+    
+
+    <div class="t-line-summary">
+      <b>11</b> relevant lines.
+      <span class="green"><b>10</b> lines covered</span> and
+      <span class="red"><b>1</b> lines missed.</span>
+    </div>
+
+    
+
+  </div>
+
+  <pre>
+    <ol>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="1">
+            
+              <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">class Customer &lt; ApplicationRecord</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="2">
+            
+              <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  include Identifiable</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="3">
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="4">
+            
+              <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  enum :currency, { usd: &quot;usd&quot;, eur: &quot;eur&quot;, gbp: &quot;gbp&quot;, jpy: &quot;jpy&quot; }, prefix: true</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="5">
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="6">
+            
+              <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  validates :email, presence: true, uniqueness: { scope: :deleted_at }, format: { with: URI::MailTo::EMAIL_REGEXP }</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="7">
+            
+              <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  validates :name, presence: true</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="8">
+            
+              <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  validates :currency, presence: true</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="9">
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="10">
+            
+              <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  has_many :subscriptions, dependent: :destroy</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="11">
+            
+              <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  has_many :invoices, dependent: :destroy</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="12">
+            
+              <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  has_many :ledger_entries, as: :entity, dependent: :destroy</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="13">
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="14">
+            
+              <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  def balance(currency = &quot;usd&quot;)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="15">
+            
+
+            
+
+            <code class="ruby">    Ledger::CalculateBalanceService.new(self, currency).call</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="16">
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="17">
+            
+
+            
+
+            <code class="ruby">end</code>
+          </li>
+        </div>
+      
+    </ol>
+  </pre>
+</div>
+
+      
+        <div class="source_table" id="f663f9c7f3765183aed0807f292d64fced50f9b5">
+  <div class="header">
+    <h3>app/models/ledger/entry.rb</h3>
     <h4>
       <span class="red">
   0.0%
@@ -900,9 +1432,9 @@
     
 
     <div class="t-line-summary">
-      <b>2</b> relevant lines.
+      <b>10</b> relevant lines.
       <span class="green"><b>0</b> lines covered</span> and
-      <span class="red"><b>2</b> lines missed.</span>
+      <span class="red"><b>10</b> lines missed.</span>
     </div>
 
     
@@ -918,12 +1450,321 @@
 
             
 
-            <code class="ruby">class Customer &lt; ApplicationRecord</code>
+            <code class="ruby">module Ledger</code>
           </li>
         </div>
       
         <div>
           <li class="missed" data-hits="0" data-linenumber="2">
+            
+
+            
+
+            <code class="ruby">  class Entry &lt; ApplicationRecord</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="3">
+            
+
+            
+
+            <code class="ruby">    self.table_name = &quot;ledger_entries&quot;</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="4">
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="5">
+            
+
+            
+
+            <code class="ruby">    belongs_to :entity, polymorphic: true</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="6">
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="7">
+            
+
+            
+
+            <code class="ruby">    enum :entry_type, { charge: &quot;charge&quot;, payment: &quot;payment&quot;, refund: &quot;refund&quot;, credit: &quot;credit&quot;, adjustment: &quot;adjustment&quot; }</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="8">
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="9">
+            
+
+            
+
+            <code class="ruby">    validates :idempotency_key, uniqueness: true</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="10">
+            
+
+            
+
+            <code class="ruby">    validates :amount_cents, presence: true</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="11">
+            
+
+            
+
+            <code class="ruby">    validates :currency, presence: true</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="12">
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="13">
+            
+
+            
+
+            <code class="ruby">end</code>
+          </li>
+        </div>
+      
+    </ol>
+  </pre>
+</div>
+
+      
+        <div class="source_table" id="487514412a81b098be9e464839a4ac929143bfce">
+  <div class="header">
+    <h3>app/services/ledger/calculate_balance_service.rb</h3>
+    <h4>
+      <span class="red">
+  50.0%
+</span>
+
+      lines covered
+    </h4>
+
+    
+
+    <div class="t-line-summary">
+      <b>8</b> relevant lines.
+      <span class="green"><b>4</b> lines covered</span> and
+      <span class="red"><b>4</b> lines missed.</span>
+    </div>
+
+    
+
+  </div>
+
+  <pre>
+    <ol>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="1">
+            
+              <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">module Ledger</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="2">
+            
+              <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">  class CalculateBalanceService</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="3">
+            
+              <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    def initialize(entity, currency, as_of = nil)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="4">
+            
+
+            
+
+            <code class="ruby">      @entity = entity</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="5">
+            
+
+            
+
+            <code class="ruby">      @currency = currency</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="6">
+            
+
+            
+
+            <code class="ruby">      @as_of = as_of || Time.current</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="7">
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="8">
+            
+
+            
+
+            <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="9">
+            
+              <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    def call</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="missed" data-hits="0" data-linenumber="10">
+            
+
+            
+
+            <code class="ruby">      Ledger::Entry</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="11">
+            
+
+            
+
+            <code class="ruby">        .where(entity: @entity, currency: @currency)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="12">
+            
+
+            
+
+            <code class="ruby">        .where(&quot;created_at &lt;= ?&quot;, @as_of)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="13">
+            
+
+            
+
+            <code class="ruby">        .sum(:amount_cents)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="14">
+            
+
+            
+
+            <code class="ruby">    end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="15">
+            
+
+            
+
+            <code class="ruby">  end</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="16">
             
 
             

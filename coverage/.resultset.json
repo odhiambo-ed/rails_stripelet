@@ -1,14 +1,80 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/odhiamboed/Desktop/JCDev/Rails/Stripelet/rails_stripelet/app/controllers/application_controller.rb": {
+      "/rails/app/models/customer.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          0,
+          null,
+          null
+        ]
+      },
+      "/rails/app/models/application_record.rb": {
+        "lines": [
+          1,
+          1,
+          null
+        ]
+      },
+      "/rails/app/models/concerns/identifiable.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          null,
+          1,
+          0,
+          0,
+          null,
+          null
+        ]
+      },
+      "/rails/app/services/ledger/calculate_balance_service.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/rails/app/controllers/application_controller.rb": {
         "lines": [
           0,
           0
         ],
         "branches": {}
       },
-      "/Users/odhiamboed/Desktop/JCDev/Rails/Stripelet/rails_stripelet/app/jobs/application_job.rb": {
+      "/rails/app/jobs/application_job.rb": {
         "lines": [
           0,
           null,
@@ -20,7 +86,7 @@
         ],
         "branches": {}
       },
-      "/Users/odhiamboed/Desktop/JCDev/Rails/Stripelet/rails_stripelet/app/mailers/application_mailer.rb": {
+      "/rails/app/mailers/application_mailer.rb": {
         "lines": [
           0,
           0,
@@ -29,22 +95,25 @@
         ],
         "branches": {}
       },
-      "/Users/odhiamboed/Desktop/JCDev/Rails/Stripelet/rails_stripelet/app/models/application_record.rb": {
+      "/rails/app/models/ledger/entry.rb": {
         "lines": [
           0,
           0,
-          0
-        ],
-        "branches": {}
-      },
-      "/Users/odhiamboed/Desktop/JCDev/Rails/Stripelet/rails_stripelet/app/models/customer.rb": {
-        "lines": [
+          0,
+          null,
+          0,
+          null,
+          0,
+          null,
+          0,
+          0,
+          0,
           0,
           0
         ],
         "branches": {}
       }
     },
-    "timestamp": 1767487295
+    "timestamp": 1767554114
   }
 }
