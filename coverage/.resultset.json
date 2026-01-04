@@ -78,6 +78,15 @@
         ],
         "branches": {}
       },
+      "/Users/odhiamboed/Desktop/JCDev/Rails/Stripelet/rails_stripelet/app/models/invoice.rb": {
+        "lines": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "branches": {}
+      },
       "/Users/odhiamboed/Desktop/JCDev/Rails/Stripelet/rails_stripelet/app/models/ledger/entry.rb": {
         "lines": [
           0,
@@ -192,6 +201,6 @@
         "branches": {}
       }
     },
-    "timestamp": 1767561513
+    "timestamp": 1767561673
   }
 }
