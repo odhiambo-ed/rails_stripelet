@@ -65,7 +65,7 @@ group :development, :test do
 
   gem "database_cleaner-active_record", "~> 2.1"
 
-  gem "shoulda-matchers", "~> 6.2"
+  gem "shoulda-matchers", "~> 7.0"
 
   gem "simplecov", "~> 0.22.0"
 end
