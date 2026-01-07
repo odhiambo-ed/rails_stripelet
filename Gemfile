@@ -44,7 +44,7 @@ gem "sidekiq-cron", "~> 2.3", ">= 2.3.1"
 
 gem "pundit", "~> 2.5"
 
-gem "bcrypt", "~> 3.1", ">= 3.1.12"
+gem "bcrypt", "~> 3.1"
 
 
 group :development, :test do
